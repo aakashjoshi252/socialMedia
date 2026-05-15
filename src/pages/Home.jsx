@@ -1,153 +1,187 @@
 import { NavLink } from 'react-router-dom';
-import { FaCalendarAlt, FaUsers, FaGem, FaMusic, FaArrowRight } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import api from '../api/api';
+import {
+  FaArrowRight,
+  FaCalendarCheck,
+  FaCheckCircle,
+  FaMapMarkerAlt,
+  FaStar,
+  FaUsers,
+} from 'react-icons/fa';
+import { blogPosts, brand, coreServices, socialLinks } from '../data/siteContent';
 
 const Home = () => {
-  const [featuredServices, setFeaturedServices] = useState([]);
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await api.get('/services');
-        // ✅ defensive: ensure data is an array
-        const services = Array.isArray(response.data) ? response.data : [];
-        setFeaturedServices(services.slice(0, 3));
-      } catch (error) {
-        console.error('Error fetching services:', error);
-        setFeaturedServices([]); // fallback to empty array
-      }
-    };
-    fetchServices();
-  }, []);
-
   const highlights = [
-    { icon: FaGem, title: 'Royal Heritage', desc: '300+ years of legacy' },
-    { icon: FaUsers, title: 'Expert Artisans', desc: 'Master craftsmen' },
-    { icon: FaCalendarAlt, title: '500+ Events', desc: 'Successfully hosted' },
-    { icon: FaMusic, title: 'Folk Music', desc: 'Live Manganiyar' },
+    { icon: FaMapMarkerAlt, title: 'Udaipur Based', desc: brand.location },
+    { icon: FaCalendarCheck, title: 'Booking Support', desc: 'Hotels, tickets and trips' },
+    { icon: FaUsers, title: 'Creator Network', desc: 'Photography and short videos' },
+    { icon: FaStar, title: 'Heritage Focus', desc: 'Royal Rajasthani storytelling' },
+  ];
+
+  const premiumPoints = [
+    'Curated stays, routes, shoots, tickets, and local experiences in one place',
+    'Content planning for reels, short videos, hotel showcases, and travel stories',
+    'Quick enquiry flow through chat, WhatsApp, contact form, and booking page',
+    'Local-first guidance for Udaipur, Rajasthan culture, timing, and guest comfort',
   ];
 
   return (
     <div>
-      {/* Hero Section with Persian-Rajasthani Fusion */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.pexels.com/photos/416676/pexels-photo-416676.jpeg?auto=compress&cs=tinysrgb&w=1600')" }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-raj-deepblue/80 via-royal-maroon/70 to-raj-deepblue/80"></div>
+      <section className="relative min-h-[88vh] overflow-hidden bg-raj-deepblue">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/15801083/pexels-photo-15801083.jpeg?auto=compress&cs=tinysrgb&w=1800')",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-raj-deepblue/90 via-royal-maroon/70 to-raj-deepblue/60" />
         </div>
-        
-        {/* Persian art pattern overlay */}
-        <div className="absolute inset-0 bg-mandala-pattern opacity-20"></div>
-        
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="inline-block mb-4 px-6 py-2 border border-royal-gold rounded-full text-royal-gold text-sm backdrop-blur-sm">
-            ~ Where Rajputana Meets Persian Elegance ~
-          </div>
-          <h1 className="text-5xl md:text-7xl font-cormorant text-raj-sand mb-6 leading-tight">
-            Celebrate Your<br />
-            <span className="text-royal-gold">Royal Legacy</span>
-          </h1>
-          <p className="text-lg md:text-xl text-raj-sand/90 mb-8 max-w-2xl mx-auto">
-            Experience unparalleled luxury with our curated blend of Rajasthani grandeur 
-            and Persian artistic finesse. From royal weddings to intimate gatherings, 
-            we craft moments that echo through eternity.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NavLink to="/services" className="gold-button flex items-center justify-center gap-2">
-              Explore Services <FaArrowRight />
-            </NavLink>
-            <NavLink to="/booking" className="maroon-button">Book Your Royal Experience</NavLink>
+        <div className="absolute inset-0 bg-mandala-pattern opacity-25" />
+
+        <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 py-16">
+          <div className="max-w-3xl text-raj-sand">
+            <img src="/free2spread-logo.png" alt={`${brand.name} logo`} className="mb-5 h-28 w-28 object-contain" />
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-royal-gold/70 px-4 py-2 text-sm text-royal-gold backdrop-blur-sm">
+              <FaMapMarkerAlt /> {brand.location}
+            </p>
+            <h1 className="text-5xl font-cormorant leading-tight text-raj-sand md:text-7xl">
+              {brand.name}
+            </h1>
+            <p className="mt-3 text-2xl font-cormorant text-royal-gold md:text-3xl">{brand.slogan}</p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-raj-sand/90">
+              Discover royal Rajasthani experiences, book travel essentials, and create social-ready stories with a Udaipur-based team that connects heritage, hospitality, and creators.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <NavLink to="/booking" className="gold-button inline-flex items-center justify-center gap-2">
+                Start Booking <FaArrowRight />
+              </NavLink>
+              <NavLink to="/services" className="maroon-button inline-flex items-center justify-center">
+                Explore Services
+              </NavLink>
+            </div>
           </div>
         </div>
-        
-        {/* Decorative arch at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-raj-sand rounded-t-3xl"></div>
       </section>
 
-      {/* Highlights Section */}
-      <section className="py-16 bg-raj-sand">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-cormorant text-royal-maroon">The Rajwada Promise</h2>
-            <div className="w-24 h-0.5 bg-royal-gold mx-auto mt-4"></div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {highlights.map((item, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-royal-gold/20 to-royal-maroon/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <item.icon className="text-royal-gold text-3xl" />
-                </div>
-                <h3 className="text-xl font-cormorant text-raj-deepblue">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+      <section className="bg-raj-sand py-14">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 md:grid-cols-4">
+          {highlights.map((item) => (
+            <div key={item.title} className="text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-royal-gold/15">
+                <item.icon className="text-2xl text-royal-maroon" />
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-cormorant text-raj-deepblue">{item.title}</h3>
+              <p className="text-sm text-gray-600">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Featured Services */}
-      <section className="py-16 bg-gradient-to-b from-raj-sand to-amber-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-cormorant text-royal-maroon">Signature Experiences</h2>
-            <div className="w-24 h-0.5 bg-royal-gold mx-auto mt-4"></div>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Each service is crafted with meticulous attention to detail, blending traditional Rajasthani 
-              hospitality with Persian artistic sensibilities.
+      <section className="bg-gradient-to-b from-raj-sand to-amber-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-cormorant text-royal-maroon">Services Built for Sharing and Travel</h2>
+            <div className="mx-auto mt-4 h-0.5 w-24 bg-royal-gold" />
+            <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+              Book the essentials, shape the itinerary, and create premium social content from the same trusted place.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredServices.map((service) => (
-              <div key={service._id} className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 card-pattern">
-                <div className="h-56 overflow-hidden">
-                  <img 
-                    src={service.imageUrl} 
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+
+          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-5">
+            {coreServices.map((service) => (
+              <div key={service._id} className="rounded-lg bg-white p-5 shadow-lg transition-transform duration-300 hover:-translate-y-1">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-royal-gold/15">
+                  <service.icon className="text-xl text-royal-maroon" />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-cormorant text-royal-maroon mb-2">{service.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{service.description.substring(0, 100)}...</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-royal-gold font-bold text-xl">₹{service.price.toLocaleString()}</span>
-                    <NavLink 
-                      to={`/booking?service=${service._id}`}
-                      className="text-raj-deepblue hover:text-royal-gold font-semibold transition-colors"
-                    >
-                      Book Now →
-                    </NavLink>
-                  </div>
-                </div>
+                <h3 className="text-2xl font-cormorant text-royal-maroon">{service.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">{service.description}</p>
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-12">
-            <NavLink to="/services" className="inline-flex items-center gap-2 text-royal-maroon hover:text-royal-gold font-semibold transition-colors">
-              View All Services <FaArrowRight />
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-royal-gold">A+ Content</p>
+            <h2 className="mt-2 text-4xl font-cormorant text-royal-maroon">Premium Heritage, Booking and Creator Support</h2>
+            <p className="mt-4 leading-relaxed text-gray-700">
+              Free2Spread is shaped for travelers, hotels, creators, local businesses, and families who want Rajasthan experiences planned well and presented beautifully.
+            </p>
+            <div className="mt-6 space-y-3">
+              {premiumPoints.map((point) => (
+                <p key={point} className="flex items-start gap-3 text-gray-700">
+                  <FaCheckCircle className="mt-1 shrink-0 text-royal-gold" />
+                  {point}
+                </p>
+              ))}
+            </div>
+            <NavLink to="/contact" className="gold-button mt-8 inline-flex items-center gap-2">
+              Connect With Us <FaArrowRight />
             </NavLink>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <img
+              src="https://images.pexels.com/photos/15869828/pexels-photo-15869828.jpeg?auto=compress&cs=tinysrgb&w=900"
+              alt="Rajasthani palace detail"
+              className="h-72 w-full rounded-lg object-cover shadow-xl sm:mt-10"
+            />
+            <img
+              src="https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=900"
+              alt="Travel booking"
+              className="h-72 w-full rounded-lg object-cover shadow-xl"
+            />
           </div>
         </div>
       </section>
-      
-      {/* Persian Art CTA */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://images.pexels.com/photos/1132305/pexels-photo-1132305.jpeg?auto=compress&cs=tinysrgb&w=1600')" }}>
-          <div className="absolute inset-0 bg-raj-deepblue/85"></div>
+
+      <section className="bg-raj-sand py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <h2 className="text-4xl font-cormorant text-royal-maroon">Latest From the Blog</h2>
+              <p className="mt-2 max-w-2xl text-gray-600">Travel tips, booking guidance, and creator ideas for Rajasthan.</p>
+            </div>
+            <NavLink to="/blog" className="inline-flex items-center gap-2 font-semibold text-raj-deepblue hover:text-royal-gold">
+              View Blog <FaArrowRight />
+            </NavLink>
+          </div>
+          <div className="grid gap-8 md:grid-cols-3">
+            {blogPosts.map((post) => (
+              <article key={post.title} className="overflow-hidden rounded-lg bg-white shadow-lg">
+                <img src={post.image} alt={post.title} className="h-48 w-full object-cover" />
+                <div className="p-5">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-royal-gold">{post.tag}</span>
+                  <h3 className="mt-2 text-2xl font-cormorant text-royal-maroon">{post.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl md:text-5xl font-cormorant text-royal-gold mb-6">
-            Inspired by Persian Miniatures & Rajputana Grandeur
-          </h2>
-          <p className="text-raj-sand text-lg mb-8">
-            Every event is a canvas where we paint with vibrant traditions, intricate patterns, 
-            and timeless elegance. Let us create your masterpiece.
-          </p>
-          <NavLink to="/contact" className="gold-button inline-block">Begin Your Journey</NavLink>
+      </section>
+
+      <section className="bg-raj-deepblue py-12 text-raj-sand">
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-4 md:flex-row md:items-center">
+          <div>
+            <h2 className="text-3xl font-cormorant text-royal-gold">Share and Connect With Free2Spread</h2>
+            <p className="mt-2 text-raj-sand/80">Follow our Rajasthan stories, reels, bookings, and creator updates.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={link.name}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-royal-gold/50 text-royal-gold hover:bg-royal-gold hover:text-raj-deepblue"
+              >
+                <link.icon />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Booking from './pages/Booking';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "services", element: <Services /> },
       { path: "booking", element: <Booking /> },
       { path: "about", element: <About /> },
+      { path: "blog", element: <Blog /> },
       { path: "contact", element: <Contact /> },
     ],
   },

@@ -1,4 +1,5 @@
-import { FaInstagram, FaFacebookF, FaTwitter, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { brand, coreServices, socialLinks } from '../../data/siteContent';
 
 const Footer = () => {
   return (
@@ -10,15 +11,29 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-cormorant text-royal-gold mb-4">Rajwada Services</h3>
+            <div className="mb-4 flex items-center gap-3">
+              <img src="/free2spread-logo.png" alt={`${brand.name} logo`} className="h-14 w-14 object-contain" />
+              <div>
+                <h3 className="text-2xl font-cormorant text-royal-gold">{brand.name}</h3>
+                <p className="text-xs text-raj-sand/80">{brand.slogan}</p>
+              </div>
+            </div>
             <p className="text-sm leading-relaxed">
-              Experience the royal essence of Rajasthan blended with Persian artistry. 
-              Creating unforgettable moments since 1985.
+              Royal Rajasthani heritage, travel bookings, creator services, and social connection from Udaipur.
             </p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-royal-gold hover:text-amber-400 transition-colors"><FaInstagram size={20} /></a>
-              <a href="#" className="text-royal-gold hover:text-amber-400 transition-colors"><FaFacebookF size={20} /></a>
-              <a href="#" className="text-royal-gold hover:text-amber-400 transition-colors"><FaTwitter size={20} /></a>
+            <div className="flex flex-wrap gap-4 mt-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  aria-label={link.name}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-royal-gold hover:text-amber-400 transition-colors"
+                >
+                  <link.icon size={20} />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -30,7 +45,17 @@ const Footer = () => {
               <li><a href="/services" className="hover:text-royal-gold transition-colors">Our Services</a></li>
               <li><a href="/booking" className="hover:text-royal-gold transition-colors">Book Now</a></li>
               <li><a href="/about" className="hover:text-royal-gold transition-colors">About Us</a></li>
+              <li><a href="/blog" className="hover:text-royal-gold transition-colors">Blog</a></li>
               <li><a href="/contact" className="hover:text-royal-gold transition-colors">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-cormorant text-royal-gold mb-4">Services</h4>
+            <ul className="space-y-2 text-sm">
+              {coreServices.map((service) => (
+                <li key={service._id}>{service.title}</li>
+              ))}
             </ul>
           </div>
 
@@ -38,31 +63,15 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-cormorant text-royal-gold mb-4">Contact Us</h4>
             <div className="space-y-3 text-sm">
-              <p className="flex items-center gap-2"><FaMapMarkerAlt className="text-royal-gold" /> Jaipur, Rajasthan, India</p>
-              <p className="flex items-center gap-2"><FaPhoneAlt className="text-royal-gold" /> +91 98765 43210</p>
-              <p className="flex items-center gap-2"><FaEnvelope className="text-royal-gold" /> royal@rajwada.com</p>
+              <p className="flex items-center gap-2"><FaMapMarkerAlt className="text-royal-gold" /> {brand.location}</p>
+              <p className="flex items-center gap-2"><FaPhoneAlt className="text-royal-gold" /> {brand.phone}</p>
+              <p className="flex items-center gap-2"><FaEnvelope className="text-royal-gold" /> {brand.email}</p>
             </div>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="text-lg font-cormorant text-royal-gold mb-4">Royal Updates</h4>
-            <p className="text-sm mb-3">Subscribe for exclusive offers</p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-3 py-2 rounded-l-md text-raj-deepblue focus:outline-none"
-              />
-              <button className="bg-royal-gold text-raj-deepblue px-4 py-2 rounded-r-md hover:bg-amber-500 transition-colors font-semibold">
-                Join
-              </button>
-            </form>
           </div>
         </div>
 
         <div className="border-t border-royal-gold/20 mt-8 pt-8 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Rajwada Services. Where Heritage Meets Elegance.</p>
+          <p>&copy; {new Date().getFullYear()} {brand.name}. {brand.slogan}</p>
         </div>
       </div>
     </footer>

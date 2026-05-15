@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/api';
 import { FaClock, FaTag, FaSearch } from 'react-icons/fa';
+import { coreServices } from '../data/siteContent';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -14,9 +15,10 @@ const Services = () => {
     const fetchServices = async () => {
       try {
         const { data } = await api.get('/services');
-        setServices(data);
+        setServices(Array.isArray(data) && data.length > 0 ? data : coreServices);
       } catch (error) {
         console.error('Error fetching services:', error);
+        setServices(coreServices);
       } finally {
         setLoading(false);
       }
@@ -26,18 +28,18 @@ const Services = () => {
 
   const categories = [
     { value: 'all', label: 'All Services' },
-    { value: 'wedding', label: 'Wedding' },
-    { value: 'mehendi', label: 'Mehendi' },
-    { value: 'catering', label: 'Catering' },
+    { value: 'travel', label: 'Travel' },
+    { value: 'creative', label: 'Creative' },
     { value: 'photography', label: 'Photography' },
-    { value: 'decoration', label: 'Decoration' },
-    { value: 'music', label: 'Music' },
   ];
 
   const filteredServices = services.filter(service => {
     const matchesSearch = service.title.toLowerCase().includes(search.toLowerCase()) ||
                           service.description.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = category === 'all' || service.category === category;
+    const matchesCategory =
+      category === 'all' ||
+      service.category === category ||
+      (category === 'photography' && service.title.toLowerCase().includes('photography'));
     return matchesSearch && matchesCategory;
   });
 
@@ -53,11 +55,10 @@ const Services = () => {
     <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Header with Persian arch design */}
       <div className="text-center mb-12 persian-arch pb-8">
-        <h1 className="text-5xl font-cormorant text-royal-maroon">Our Royal Services</h1>
+        <h1 className="text-5xl font-cormorant text-royal-maroon">Free2Spread Services</h1>
         <div className="w-32 h-0.5 bg-royal-gold mx-auto mt-4 mb-4"></div>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Discover our exquisite range of services, each curated with the perfect blend 
-          of Rajasthani heritage and Persian artistry.
+          Hotel bookings, ticket bookings, photography, short video creation, and trip bookings for Rajasthan travelers and creators.
         </p>
       </div>
 
@@ -119,7 +120,7 @@ const Services = () => {
                   </div>
                   <div className="flex items-center gap-2 text-royal-gold font-bold">
                     <FaTag />
-                    <span className="text-xl">₹{service.price.toLocaleString()}</span>
+                    <span className="text-xl">INR {service.price.toLocaleString()}</span>
                   </div>
                 </div>
                 <Link

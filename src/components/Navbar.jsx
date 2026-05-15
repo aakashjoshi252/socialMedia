@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes, FaCrown } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { brand } from '../data/siteContent';
 
 export default function Navbar(){
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,7 @@ export default function Navbar(){
     { name: 'Services', path: '/services' },
     { name: 'Booking', path: '/booking' },
     { name: 'About', path: '/about' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -22,10 +24,14 @@ export default function Navbar(){
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2 group">
-            <FaCrown className="text-royal-gold text-3xl group-hover:rotate-12 transition-transform duration-500" />
+            <img
+              src="/free2spread-logo.png"
+              alt={`${brand.name} logo`}
+              className="h-14 w-14 rounded-full object-contain ring-1 ring-royal-gold/60"
+            />
             <div>
-              <h1 className="text-2xl font-cormorant text-royal-gold tracking-wider">Rajwada Services</h1>
-              <p className="text-xs text-raj-sand font-poppins tracking-wide">~ The Royal Elegance ~</p>
+              <h1 className="text-2xl font-cormorant text-royal-gold tracking-wider">{brand.name}</h1>
+              <p className="max-w-44 text-xs text-raj-sand font-poppins leading-tight">{brand.slogan}</p>
             </div>
           </NavLink>
 
