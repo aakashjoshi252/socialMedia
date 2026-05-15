@@ -1,5 +1,6 @@
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import { brand, coreServices, socialLinks } from '../../data/siteContent';
+import { NavLink } from 'react-router-dom';
+import { brand, coreServices, footerQuickLinks, socialLinks } from '../../data/siteContent';
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <img src="/free2spread-logo.png" alt={`${brand.name} logo`} className="h-14 w-14 object-contain" />
+              <img src={brand.logo} alt={`${brand.name} logo`} className="h-16 w-16 object-contain" />
               <div>
                 <h3 className="text-2xl font-cormorant text-royal-gold">{brand.name}</h3>
                 <p className="text-xs text-raj-sand/80">{brand.slogan}</p>
@@ -41,12 +42,13 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-cormorant text-royal-gold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/" className="hover:text-royal-gold transition-colors">Home</a></li>
-              <li><a href="/services" className="hover:text-royal-gold transition-colors">Our Services</a></li>
-              <li><a href="/booking" className="hover:text-royal-gold transition-colors">Book Now</a></li>
-              <li><a href="/about" className="hover:text-royal-gold transition-colors">About Us</a></li>
-              <li><a href="/blog" className="hover:text-royal-gold transition-colors">Blog</a></li>
-              <li><a href="/contact" className="hover:text-royal-gold transition-colors">Contact</a></li>
+              {footerQuickLinks.map((link) => (
+                <li key={link.path}>
+                  <NavLink to={link.path} className="hover:text-royal-gold transition-colors">
+                    {link.name}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -54,7 +56,11 @@ const Footer = () => {
             <h4 className="text-lg font-cormorant text-royal-gold mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
               {coreServices.map((service) => (
-                <li key={service._id}>{service.title}</li>
+                <li key={service._id}>
+                  <NavLink to={`/booking?service=${service._id}`} className="hover:text-royal-gold transition-colors">
+                    {service.title}
+                  </NavLink>
+                </li>
               ))}
             </ul>
           </div>

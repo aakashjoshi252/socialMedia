@@ -1,4 +1,5 @@
 import { FaArrowRight } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 import { blogPosts } from '../data/siteContent';
 
 const Blog = () => {
@@ -32,9 +33,9 @@ const Blog = () => {
                 </span>
                 <h2 className="mt-4 text-2xl font-cormorant text-royal-maroon">{post.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
-                <button className="mt-5 inline-flex items-center gap-2 font-semibold text-raj-deepblue hover:text-royal-gold">
+                <NavLink to={`/blog/${post.slug}`} className="mt-5 inline-flex items-center gap-2 font-semibold text-raj-deepblue hover:text-royal-gold">
                   Read guide <FaArrowRight />
-                </button>
+                </NavLink>
               </div>
             </article>
           ))}

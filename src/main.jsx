@@ -9,6 +9,11 @@ import Booking from './pages/Booking';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import BlogGuide from './pages/BlogGuide';
+import Reviews from './pages/Reviews';
+import Gallery from './pages/Gallery';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +25,11 @@ const router = createBrowserRouter([
       { path: "booking", element: <Booking /> },
       { path: "about", element: <About /> },
       { path: "blog", element: <Blog /> },
+      { path: "blog/:slug", element: <BlogGuide /> },
+      { path: "reviews", element: <Reviews /> },
+      { path: "gallery", element: <Gallery /> },
+      { path: "privacy", element: <Privacy /> },
+      { path: "terms", element: <Terms /> },
       { path: "contact", element: <Contact /> },
     ],
   },

@@ -1,22 +1,13 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { brand } from '../data/siteContent';
+import { brand, navLinks } from '../data/siteContent';
 
 export default function Navbar(){
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Booking', path: '/booking' },
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => (path === '/' ? location.pathname === path : location.pathname.startsWith(path));
 
   return (
     <nav className="bg-gradient-to-r from-raj-deepblue via-royal-maroon to-raj-deepblue shadow-xl sticky top-0 z-50">
@@ -25,13 +16,13 @@ export default function Navbar(){
           {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2 group">
             <img
-              src="/free2spread-logo.png"
+              src={brand.logo}
               alt={`${brand.name} logo`}
-              className="h-14 w-14 rounded-full object-contain ring-1 ring-royal-gold/60"
+              className="h-16 w-16 object-contain"
             />
             <div>
-              <h1 className="text-2xl font-cormorant text-royal-gold tracking-wider">{brand.name}</h1>
-              <p className="max-w-44 text-xs text-raj-sand font-poppins leading-tight">{brand.slogan}</p>
+              <h1 className="text-xl font-cormorant text-royal-gold tracking-wider lg:text-2xl">{brand.name}</h1>
+              <p className="hidden max-w-44 text-xs text-raj-sand font-poppins leading-tight lg:block">{brand.slogan}</p>
             </div>
           </NavLink>
 

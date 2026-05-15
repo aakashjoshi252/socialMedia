@@ -1,5 +1,6 @@
 // frontend/src/layout/layout.jsx
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import Footer from '../components/footer/Footer';
 import ChatBot from '../components/ChatBot';
@@ -13,6 +14,7 @@ export default function Layout(){
       </main>
       <Footer />
       <ChatBot />
+      <Toaster position="top-right" />
     </div>
   );
 };

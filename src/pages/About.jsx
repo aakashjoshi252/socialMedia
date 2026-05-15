@@ -22,7 +22,7 @@ const About = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-raj-deepblue/85 to-royal-maroon/75" />
         </div>
         <div className="relative z-10 px-6 py-20 text-center text-raj-sand">
-          <img src="/free2spread-logo.png" alt={`${brand.name} logo`} className="mx-auto mb-5 h-28 w-28 object-contain" />
+          <img src={brand.logo} alt={`${brand.name} logo`} className="mx-auto mb-5 h-32 w-32 object-contain" />
           <h1 className="text-5xl font-cormorant">{brand.name}</h1>
           <div className="mx-auto mb-6 mt-4 h-0.5 w-24 bg-royal-gold" />
           <p className="mx-auto max-w-2xl text-lg">{brand.slogan}</p>

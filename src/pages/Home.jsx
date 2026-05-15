@@ -1,15 +1,32 @@
 import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   FaArrowRight,
   FaCalendarCheck,
   FaCheckCircle,
   FaMapMarkerAlt,
+  FaQuoteLeft,
   FaStar,
   FaUsers,
 } from 'react-icons/fa';
-import { blogPosts, brand, coreServices, socialLinks } from '../data/siteContent';
+import api from '../api/api';
+import { blogPosts, brand, coreServices, defaultReviews, socialLinks } from '../data/siteContent';
 
 const Home = () => {
+  const [reviews, setReviews] = useState(defaultReviews);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const { data } = await api.get('/reviews');
+        setReviews(Array.isArray(data) && data.length > 0 ? data : defaultReviews);
+      } catch {
+        setReviews(defaultReviews);
+      }
+    };
+    fetchReviews();
+  }, []);
+
   const highlights = [
     { icon: FaMapMarkerAlt, title: 'Udaipur Based', desc: brand.location },
     { icon: FaCalendarCheck, title: 'Booking Support', desc: 'Hotels, tickets and trips' },
@@ -40,7 +57,7 @@ const Home = () => {
 
         <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 py-16">
           <div className="max-w-3xl text-raj-sand">
-            <img src="/free2spread-logo.png" alt={`${brand.name} logo`} className="mb-5 h-28 w-28 object-contain" />
+            <img src={brand.logo} alt={`${brand.name} logo`} className="mb-5 h-32 w-32 object-contain" />
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-royal-gold/70 px-4 py-2 text-sm text-royal-gold backdrop-blur-sm">
               <FaMapMarkerAlt /> {brand.location}
             </p>
@@ -148,13 +165,48 @@ const Home = () => {
             </NavLink>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
-            {blogPosts.map((post) => (
+            {blogPosts.slice(0, 3).map((post) => (
               <article key={post.title} className="overflow-hidden rounded-lg bg-white shadow-lg">
                 <img src={post.image} alt={post.title} className="h-48 w-full object-cover" />
                 <div className="p-5">
                   <span className="text-xs font-semibold uppercase tracking-widest text-royal-gold">{post.tag}</span>
                   <h3 className="mt-2 text-2xl font-cormorant text-royal-maroon">{post.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+                  <NavLink to={`/blog/${post.slug}`} className="mt-4 inline-flex items-center gap-2 font-semibold text-raj-deepblue hover:text-royal-gold">
+                    Read guide <FaArrowRight />
+                  </NavLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <h2 className="text-4xl font-cormorant text-royal-maroon">Guest Reviews</h2>
+              <p className="mt-2 max-w-2xl text-gray-600">Real feedback from travelers, creators, hotels, and families we support.</p>
+            </div>
+            <NavLink to="/reviews" className="gold-button inline-flex items-center justify-center gap-2">
+              Add Review <FaArrowRight />
+            </NavLink>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {reviews.slice(0, 3).map((review) => (
+              <article key={review._id || review.name} className="rounded-lg bg-raj-sand p-6 shadow-lg">
+                <FaQuoteLeft className="mb-4 text-2xl text-royal-gold" />
+                <div className="mb-3 flex gap-1 text-royal-gold">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <FaStar key={index} className={index < Number(review.rating) ? 'text-royal-gold' : 'text-gray-300'} />
+                  ))}
+                </div>
+                <p className="text-sm leading-relaxed text-gray-700">{review.message}</p>
+                <div className="mt-5 border-t border-royal-gold/20 pt-4">
+                  <h3 className="font-cormorant text-xl text-royal-maroon">{review.name}</h3>
+                  <p className="text-xs text-gray-500">{review.service} {review.location ? `- ${review.location}` : ''}</p>
                 </div>
               </article>
             ))}
