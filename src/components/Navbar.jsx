@@ -21,7 +21,7 @@ export default function Navbar(){
               className="h-16 w-16 object-contain"
             />
             <div>
-              <h1 className="text-xl font-cormorant text-royal-gold tracking-wider lg:text-2xl">{brand.name}</h1>
+              <span className="block text-xl font-cormorant font-semibold text-royal-gold tracking-wider lg:text-2xl">{brand.name}</span>
               <p className="hidden max-w-44 text-xs text-raj-sand font-poppins leading-tight lg:block">{brand.slogan}</p>
             </div>
           </NavLink>

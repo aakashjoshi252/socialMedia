@@ -8,6 +8,8 @@
   --color-raj-sand: #FFF8E7;
   --color-persian-teal: #008080;
   --color-persian-rose: #FE28A2;
+  --color-travel-sky: #E8F5F7;
+  --color-travel-ink: #102033;
   --font-cormorant: "Cormorant Garamond", serif;
   --font-poppins: "Poppins", sans-serif;
   --background-image-mandala-pattern: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M30 0 L33.5 15 L30 30 L26.5 15 Z" fill="%23D4AF37" opacity="0.08"/%3E%3Ccircle cx="30" cy="30" r="10" fill="%23D4AF37" opacity="0.05"/%3E%3C/svg%3E');
@@ -45,11 +47,31 @@
   }
   
   .gold-button {
-    @apply bg-royal-gold text-raj-deepblue px-6 py-2 rounded-full font-semibold hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg;
+    @apply bg-royal-gold text-raj-deepblue px-6 py-2 rounded-full font-semibold hover:bg-amber-500 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg;
   }
   
   .maroon-button {
-    @apply bg-royal-maroon text-raj-sand px-6 py-2 rounded-full font-semibold hover:bg-red-900 transition-all duration-300 transform hover:scale-105 shadow-lg;
+    @apply bg-royal-maroon text-raj-sand px-6 py-2 rounded-full font-semibold hover:bg-red-900 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .premium-card {
+    @apply rounded-lg border border-white/70 bg-white/90 shadow-xl shadow-raj-deepblue/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl;
+  }
+
+  .glass-panel {
+    @apply rounded-lg border border-white/30 bg-white/15 shadow-2xl backdrop-blur-md;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-widest text-royal-gold;
+  }
+
+  .focus-ring {
+    @apply outline-none focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30;
   }
   
   .card-pattern {

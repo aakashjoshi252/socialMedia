@@ -12,6 +12,7 @@ import Blog from './pages/Blog';
 import BlogGuide from './pages/BlogGuide';
 import Reviews from './pages/Reviews';
 import Gallery from './pages/Gallery';
+import TravelGuide from './pages/TravelGuide';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "blog/:slug", element: <BlogGuide /> },
       { path: "reviews", element: <Reviews /> },
       { path: "gallery", element: <Gallery /> },
+      { path: "travel-guide", element: <TravelGuide /> },
       { path: "privacy", element: <Privacy /> },
       { path: "terms", element: <Terms /> },
       { path: "contact", element: <Contact /> },

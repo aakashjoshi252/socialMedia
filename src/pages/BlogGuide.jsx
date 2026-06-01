@@ -1,5 +1,6 @@
 import { NavLink, useParams } from 'react-router-dom';
 import { FaArrowLeft, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
+import Seo from '../components/Seo';
 import { blogPosts } from '../data/siteContent';
 
 const BlogGuide = () => {
@@ -9,6 +10,7 @@ const BlogGuide = () => {
   if (!post) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-20 text-center">
+        <Seo title="Guide Not Found | Free2Spread" description="The requested Free2Spread travel guide was not found." path="/blog" />
         <h1 className="text-5xl font-cormorant text-royal-maroon">Guide Not Found</h1>
         <p className="mt-4 text-gray-600">The guide you are looking for may have moved.</p>
         <NavLink to="/blog" className="gold-button mt-8 inline-flex items-center gap-2">
@@ -22,6 +24,7 @@ const BlogGuide = () => {
 
   return (
     <div className="bg-raj-sand">
+      <Seo title={`${post.title} | Free2Spread`} description={post.excerpt} image={post.image} path={`/blog/${post.slug}`} />
       <section className="relative overflow-hidden bg-raj-deepblue text-raj-sand">
         <img src={post.image} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-r from-raj-deepblue via-royal-maroon/80 to-raj-deepblue/80" />

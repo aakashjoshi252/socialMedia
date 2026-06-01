@@ -1,10 +1,16 @@
 import { FaArrowRight } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { blogPosts } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 const Blog = () => {
   return (
     <div className="bg-raj-sand">
+      <Seo
+        title="Travel Blog | Free2Spread"
+        description="Read Rajasthan destination guides, photography tips, booking windows, travel hacks, and itinerary ideas from Free2Spread."
+        path="/blog"
+      />
       <section className="relative overflow-hidden bg-raj-deepblue py-20 text-raj-sand">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
@@ -23,10 +29,18 @@ const Blog = () => {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
+          {['Travel Articles', 'Destination Guides', 'Photography Tips', 'Travel Hacks', 'Visa Information', 'Trending Destinations'].map((category) => (
+            <span key={category} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-royal-maroon shadow">
+              {category}
+            </span>
+          ))}
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {blogPosts.map((post) => (
-            <article key={post.title} className="overflow-hidden rounded-lg bg-white shadow-lg">
-              <img src={post.image} alt={post.title} className="h-56 w-full object-cover" />
+            <article key={post.title} className="premium-card overflow-hidden">
+              <img src={post.image} alt={post.title} loading="lazy" className="h-56 w-full object-cover" />
               <div className="p-6">
                 <span className="rounded-full bg-royal-gold/15 px-3 py-1 text-xs font-semibold text-royal-maroon">
                   {post.tag}

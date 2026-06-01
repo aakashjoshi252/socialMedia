@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import api from '../api/api';
-import { FaClock, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhoneAlt } from 'react-icons/fa';
+import { FaClock, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
+import Seo from '../components/Seo';
 import { brand, socialLinks } from '../data/siteContent';
 
 const Contact = () => {
@@ -33,6 +34,11 @@ const Contact = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
+      <Seo
+        title="Contact Free2Spread | Udaipur Travel Booking Support"
+        description="Contact Free2Spread by form, WhatsApp, phone, email, Google Maps, and social media for hotels, tickets, trips, photography, and videos."
+        path="/contact"
+      />
       <div className="mb-12 text-center">
         <h1 className="text-5xl font-cormorant text-royal-maroon">Connect With Free2Spread</h1>
         <div className="mx-auto mb-4 mt-4 h-0.5 w-32 bg-royal-gold" />
@@ -62,6 +68,7 @@ const Contact = () => {
           </div>
 
           <div className="rounded-lg bg-white p-6 text-center shadow-lg">
+            <FaWhatsapp className="mx-auto mb-3 text-4xl text-green-500" />
             <h4 className="mb-2 font-cormorant text-xl text-royal-maroon">Quick Booking Support</h4>
             <p className="mb-3 text-sm text-gray-500">Chat or WhatsApp for faster help</p>
             <a href={brand.whatsapp} target="_blank" rel="noreferrer" className="font-bold text-royal-gold">

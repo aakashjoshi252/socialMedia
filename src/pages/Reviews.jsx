@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { FaPaperPlane, FaQuoteLeft, FaStar, FaUser } from 'react-icons/fa';
+import { FaPlayCircle, FaPaperPlane, FaQuoteLeft, FaStar, FaUser } from 'react-icons/fa';
 import api from '../api/api';
-import { coreServices, defaultReviews } from '../data/siteContent';
+import Seo from '../components/Seo';
+import { coreServices, defaultReviews, trustStats } from '../data/siteContent';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState(defaultReviews);
@@ -60,6 +61,11 @@ const Reviews = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
+      <Seo
+        title="Customer Reviews | Free2Spread"
+        description="Read Free2Spread customer reviews, verified-style testimonials, ratings, video review placeholders, and travel service stories."
+        path="/reviews"
+      />
       <div className="mb-12 text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-royal-gold">Guest Voices</p>
         <h1 className="text-5xl font-cormorant text-royal-maroon">Free2Spread Reviews</h1>
@@ -67,6 +73,15 @@ const Reviews = () => {
         <p className="mx-auto max-w-2xl text-gray-600">
           Read guest experiences and add your own review for booking support, trips, photography, or short video creation.
         </p>
+      </div>
+
+      <div className="mb-10 grid gap-4 md:grid-cols-4">
+        {trustStats.map((stat) => (
+          <div key={stat.label} className="rounded-lg bg-white p-5 text-center shadow-lg">
+            <p className="text-3xl font-bold text-royal-maroon">{stat.value}</p>
+            <p className="mt-1 text-sm text-gray-600">{stat.label}</p>
+          </div>
+        ))}
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
@@ -140,6 +155,19 @@ const Reviews = () => {
           </form>
         </aside>
       </div>
+
+      <section className="mt-14 grid gap-6 md:grid-cols-3">
+        {['Family Udaipur Trip', 'Hotel Reel Campaign', 'Couple Heritage Shoot'].map((story) => (
+          <article key={story} className="rounded-lg bg-gradient-to-br from-royal-maroon to-raj-deepblue p-6 text-raj-sand shadow-xl">
+            <FaPlayCircle className="mb-5 text-4xl text-royal-gold" />
+            <p className="text-xs font-semibold uppercase tracking-widest text-royal-gold">Video Review</p>
+            <h2 className="mt-2 text-2xl font-cormorant text-raj-sand">{story}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-raj-sand/80">
+              A short customer story format ready for embedded video testimonials when production media is available.
+            </p>
+          </article>
+        ))}
+      </section>
     </div>
   );
 };

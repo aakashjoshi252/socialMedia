@@ -1,8 +1,10 @@
 import { brand } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 const Terms = () => {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
+      <Seo title="Terms and Conditions | Free2Spread" description="Free2Spread terms for travel bookings, service inquiries, pricing, confirmations, and guest responsibilities." path="/terms" />
       <h1 className="text-5xl font-cormorant text-royal-maroon">Terms of Service</h1>
       <div className="mb-8 mt-4 h-0.5 w-24 bg-royal-gold" />
       <div className="space-y-6 rounded-lg bg-white p-8 leading-relaxed text-gray-700 shadow-xl">

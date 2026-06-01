@@ -1,8 +1,10 @@
 import { brand } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 const Privacy = () => {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
+      <Seo title="Privacy Policy | Free2Spread" description="Free2Spread privacy policy for booking inquiries, contact forms, reviews, and travel service data." path="/privacy" />
       <h1 className="text-5xl font-cormorant text-royal-maroon">Privacy Policy</h1>
       <div className="mb-8 mt-4 h-0.5 w-24 bg-royal-gold" />
       <div className="space-y-6 rounded-lg bg-white p-8 leading-relaxed text-gray-700 shadow-xl">
