@@ -15,8 +15,39 @@ import Gallery from './pages/Gallery';
 import TravelGuide from './pages/TravelGuide';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import { AdminAuthProvider } from './admin/AdminAuthContext';
+import ProtectedAdminRoute from './admin/ProtectedAdminRoute';
+import AdminLayout from './admin/AdminLayout';
+import AdminLogin from './admin/pages/AdminLogin';
+import AdminDashboard from './admin/pages/AdminDashboard';
+import AdminResourcePage from './admin/pages/AdminResourcePage';
 
 const router = createBrowserRouter([
+  {
+    path: "/admin/login",
+    element: (
+      <AdminAuthProvider>
+        <AdminLogin />
+      </AdminAuthProvider>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <AdminAuthProvider>
+        <ProtectedAdminRoute />
+      </AdminAuthProvider>
+    ),
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: ":resource", element: <AdminResourcePage /> },
+        ],
+      },
+    ],
+  },
   {
     path: "/",
     element: <Layout />,
